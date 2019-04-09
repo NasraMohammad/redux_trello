@@ -1,38 +1,46 @@
 import React from "react";
-import { Dropdown, Menu } from "semantic-ui-react";
+//import { Dropdown, Menu } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { moveCard } from "../actions";
 
 class MoveToDropdown extends React.Component {
-  check = () => {
-    console.log(this.props);
+  state = { moveToValue: 0 };
+  check = e => {
+    this.setState({ moveToValue: e.target.value });
   };
-  //state = { value: " " };
+
+  moveFunction = () => {
+    const { listid, cardid, title, user, dispatch } = this.props;
+    console.log({ listid, cardid, title, user });
+    dispatch(moveCard(this.state.moveToValue, listid, cardid, title, user));
+  };
+
   render() {
-    const { lists, originalListId } = this.props;
-
-    const options = lists.map(list => {
-      if (list.id !== originalListId) {
-        return { key: list.id, text: list.id + 1, value: list.id };
-      } else return;
-    });
-    // console.log(this.props);
-
+    const { lists, listid } = this.props;
     return (
       <div>
-        <Menu compact>
-          <Dropdown
-            onChange={this.check}
-            text="Move To"
-            options={options}
-            simple
-            item
-            //  value={this.state.value}
-          />
-        </Menu>
+        <select
+          value={this.state.moveToValue}
+          placeholder="Move To"
+          onChange={this.check}
+        >
+          {lists.map(list => {
+            const x = listid === list.id ? "disabled" : "";
+            return (
+              <option key={list.id} value={list.id} disabled={x}>
+                {list.id}
+              </option>
+            );
+          })}
+        </select>
+        <button type="submit" onClick={this.moveFunction}>
+          Move
+        </button>
       </div>
     );
   }
 }
+
 const mapStateToProps = state => ({
   lists: state.lists
 });

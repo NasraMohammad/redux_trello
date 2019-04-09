@@ -13,6 +13,7 @@ const TodoList = ({ title, cards, listid }) => {
           title={card.title}
           listid={listid}
           cardid={card.id}
+          user={card.user}
         />
       ))}
       <LCButton listid={listid} />

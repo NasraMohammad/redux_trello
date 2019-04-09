@@ -8,33 +8,51 @@ import { connect } from "react-redux";
 import { removeCard } from "../actions";
 
 class TodoCard extends React.Component {
+  state = { user: this.props.user, title: this.props.title };
   removeCardFunction = () => {
     const { listid, cardid, dispatch } = this.props;
     dispatch(removeCard(listid, cardid));
-    //   console.log(this.props);
   };
 
   renderMoveTo = () => {
     const { lists, listid, cardid } = this.props;
-    console.log(lists.length);
     if (lists.length > 1) {
-      return <MoveToDropdown orignalListId={listid} originalCardid={cardid} />;
+      return (
+        <MoveToDropdown
+          listid={listid}
+          cardid={cardid}
+          title={this.state.title}
+          user={this.props.user}
+        />
+      );
     } else return null;
   };
 
   render() {
-    const { title } = this.props;
-
+    // console.log(this.state);
     return (
       <Card className="cardContainer">
         <CardContent>
-          <p>{title}</p>
+          <div
+            className="ui input"
+            style={{ marginBottom: "5px", width: "160px" }}
+          >
+            <input
+              type="text"
+              value={this.state.title}
+              onChange={e => this.setState({ title: e.target.value })}
+            />
+          </div>
           {this.renderMoveTo()}
           <div
             className="ui input"
             style={{ marginBottom: "5px", width: "160px" }}
           >
-            <input type="text" placeholder="Enter User" />
+            <input
+              type="text"
+              placeholder="Enter User"
+              onChange={e => this.setState({ user: e.target.value })}
+            />
           </div>
           <div className="ui checkbox" style={{ marginBottom: "7px" }}>
             <input
@@ -44,7 +62,6 @@ class TodoCard extends React.Component {
             />
             <label>Task Completed</label>
           </div>
-          <button className="ui primary button">Update Card</button>
         </CardContent>
       </Card>
     );

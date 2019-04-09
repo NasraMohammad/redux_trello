@@ -16,9 +16,11 @@ const listsReducer = (state = initialState, action) => {
     case "ADD_CARD":
       const newCard = {
         title: action.payload.title,
+        user: action.payload.user,
         id: cardid
       };
       cardid += 1;
+
       const newState = state.map(list => {
         if (list.id === action.payload.listid)
           return {
@@ -30,6 +32,35 @@ const listsReducer = (state = initialState, action) => {
         }
       });
       return newState;
+
+    case "MOVE_CARD":
+      const movedCard = {
+        title: action.title,
+        user: action.user,
+        id: action.cardid
+      };
+
+      const movedState = state.map(list => {
+        let removedCard = [];
+        const x = parseInt(action.moveToValue);
+        // console.log(list.id);
+        // console.log(action.moveToValue);
+        // console.log(x);
+        if (list.id === x) {
+          return {
+            ...list,
+            cards: [...list.cards, movedCard]
+          };
+        } else if (list.id === action.listid) {
+          removedCard = list.cards.filter(card => {
+            return card.id !== action.cardid;
+          });
+          return { ...list, cards: [...removedCard] };
+        } else {
+          return list;
+        }
+      });
+      return movedState;
 
     case "REMOVE_CARD":
       let removedCard = [];
@@ -44,6 +75,7 @@ const listsReducer = (state = initialState, action) => {
         }
       });
       return updatedState;
+
     default:
       return state;
   }
