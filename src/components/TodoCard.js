@@ -36,13 +36,13 @@ class TodoCard extends React.Component {
         <CardContent>
           <label>
             <div
-              style={{ float: "left", paddingRight: "4px", fontSize: "16px" }}
+              style={{ float: "left", paddingRight: "4px", fontSize: "14px" }}
             >
               Card Title:
             </div>
             <div
               className="ui input"
-              style={{ marginBottom: "8px", width: "70px" }}
+              style={{ marginBottom: "8px", width: "80px", float: "right" }}
             >
               <input
                 type="text"
@@ -54,7 +54,7 @@ class TodoCard extends React.Component {
           </label>
           <div
             className="ui input"
-            style={{ marginBottom: "5px", width: "160px" }}
+            style={{ marginBottom: "5px", width: "150px" }}
           >
             <input
               type="text"

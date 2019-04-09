@@ -32,7 +32,8 @@ class MoveToDropdown extends React.Component {
           onChange={this.check}
           className="ui compact menu"
           style={{
-            fontFamily: "Gill Sans MT"
+            fontFamily: "Gill Sans MT",
+            width: "60px"
           }}
         >
           {lists.map(list => {
@@ -47,9 +48,11 @@ class MoveToDropdown extends React.Component {
         <button
           type="submit"
           onClick={this.moveFunction}
-          className="ui green basic button"
+          className="ui blue basic button"
           style={{
-            fontFamily: "Gill Sans MT"
+            fontFamily: "Gill Sans MT",
+            float: "right",
+            height: "40px"
           }}
         >
           Move
