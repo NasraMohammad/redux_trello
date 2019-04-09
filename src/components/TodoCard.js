@@ -16,20 +16,21 @@ class TodoCard extends React.Component {
 
   renderMoveTo = () => {
     const { lists, listid, cardid } = this.props;
+    console.log(this.state.user);
     if (lists.length > 1) {
       return (
         <MoveToDropdown
           listid={listid}
           cardid={cardid}
           title={this.state.title}
-          user={this.props.user}
+          user={this.state.user}
         />
       );
     } else return null;
   };
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <Card className="cardContainer">
         <CardContent>
@@ -51,6 +52,7 @@ class TodoCard extends React.Component {
             <input
               type="text"
               placeholder="Enter User"
+              value={this.state.user}
               onChange={e => this.setState({ user: e.target.value })}
             />
           </div>

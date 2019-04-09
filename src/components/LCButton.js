@@ -28,7 +28,7 @@ class LCButton extends React.Component {
     return;
   };
 
-  addCardtFunction = () => {
+  addCardFunction = () => {
     const { dispatch, listid } = this.props;
     const { title } = this.state;
 
@@ -72,7 +72,7 @@ class LCButton extends React.Component {
         >
           <button
             className="ui button"
-            onMouseDown={list ? this.addListFunction : this.addCardtFunction} //use onMouseDown because onBlur gets called first whih is why onClick doesnt work
+            onMouseDown={list ? this.addListFunction : this.addCardFunction} //use onMouseDown because onBlur gets called first whih is why onClick doesnt work
             variant="contained"
             style={{
               fontFamily: "Gill Sans",
