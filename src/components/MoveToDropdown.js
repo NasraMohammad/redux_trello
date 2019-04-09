@@ -18,22 +18,40 @@ class MoveToDropdown extends React.Component {
   render() {
     const { lists, listid } = this.props;
     return (
-      <div>
+      <div
+        style={{
+          marginTop: "5px",
+          fontFamily: "Gill Sans MT",
+          borderRadius: "3px",
+          padding: "2px"
+        }}
+      >
         <select
           value={this.state.moveToValue}
           placeholder="Move To"
           onChange={this.check}
+          className="ui compact menu"
+          style={{
+            fontFamily: "Gill Sans MT"
+          }}
         >
           {lists.map(list => {
             const x = listid === list.id ? "disabled" : "";
             return (
               <option key={list.id} value={list.id} disabled={x}>
-                {list.id}
+                {list.title}
               </option>
             );
           })}
         </select>
-        <button type="submit" onClick={this.moveFunction}>
+        <button
+          type="submit"
+          onClick={this.moveFunction}
+          className="ui green basic button"
+          style={{
+            fontFamily: "Gill Sans MT"
+          }}
+        >
           Move
         </button>
       </div>

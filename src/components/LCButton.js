@@ -46,9 +46,8 @@ class LCButton extends React.Component {
     const buttonText = list ? "Add List" : "Add Card";
 
     return (
-      <div className="fontgill">
+      <div>
         <Card
-          className="fontgill"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -63,7 +62,11 @@ class LCButton extends React.Component {
               autoFocus
               value={this.state.title}
               onChange={e => this.setState({ title: e.target.value })}
-              style={{ marginRight: "5px" }}
+              style={{
+                marginRight: "5px",
+                fontFamily: "Gill Sans MT",
+                borderColor: "white"
+              }}
             />
           </div>
         </Card>
@@ -75,7 +78,7 @@ class LCButton extends React.Component {
             onMouseDown={list ? this.addListFunction : this.addCardFunction} //use onMouseDown because onBlur gets called first whih is why onClick doesnt work
             variant="contained"
             style={{
-              fontFamily: "Gill Sans",
+              fontFamily: "Gill Sans MT",
               color: "white",
               backgroundColor: "#5aac44",
               margin: "5px"
@@ -83,7 +86,11 @@ class LCButton extends React.Component {
           >
             {buttonText}
           </button>
-          <Icon style={{ marginLeft: "8px", cursor: "pointer" }}>close</Icon>
+          <Icon
+            style={{ marginLeft: "8px", cursor: "pointer", color: "white" }}
+          >
+            close
+          </Icon>
         </div>
       </div>
     );
