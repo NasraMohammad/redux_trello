@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 
 import { connect } from "react-redux";
 import { addList, addCard } from "../actions";
+import { allStyles } from "../styles";
 
 class LCButton extends React.Component {
   constructor(props) {
@@ -49,13 +50,7 @@ class LCButton extends React.Component {
 
     return (
       <div>
-        <Card
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "6px 6px 6px 6px"
-          }}
-        >
+        <Card className="cardUI">
           <div className="ui input ">
             <input
               type="text"
@@ -64,11 +59,7 @@ class LCButton extends React.Component {
               autoFocus
               value={this.state.title}
               onChange={e => this.setState({ title: e.target.value })}
-              style={{
-                marginRight: "5px",
-                fontFamily: "Gill Sans MT",
-                borderColor: "white"
-              }}
+              style={allStyles.addFormText}
             />
           </div>
         </Card>
@@ -79,20 +70,11 @@ class LCButton extends React.Component {
             className="ui button"
             onMouseDown={list ? this.addListFunction : this.addCardFunction} //use onMouseDown because onBlur gets called first whih is why onClick doesnt work
             variant="contained"
-            style={{
-              fontFamily: "Gill Sans MT",
-              color: "white",
-              backgroundColor: "#5aac44",
-              margin: "5px"
-            }}
+            style={allStyles.addButton}
           >
             {buttonText}
           </button>
-          <Icon
-            style={{ marginLeft: "8px", cursor: "pointer", color: "white" }}
-          >
-            close
-          </Icon>
+          <Icon style={allStyles.icon}>close</Icon>
         </div>
       </div>
     );
@@ -106,7 +88,7 @@ class LCButton extends React.Component {
     const buttonTextColor = list ? "white" : "inherit";
     const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
 
-    const styles = {
+    const listCardStyles = {
       addButtonContainer: {
         opacity: buttonTextOpacity,
         color: buttonTextColor,
@@ -116,7 +98,7 @@ class LCButton extends React.Component {
 
     return (
       <div
-        style={styles.addButtonContainer}
+        style={listCardStyles.addButtonContainer}
         className="addButtonContainer"
         onClick={this.trueStatus}
       >

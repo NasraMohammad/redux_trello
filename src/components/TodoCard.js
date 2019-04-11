@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 import { connect } from "react-redux";
 import { removeCard } from "../actions";
+import { allStyles } from "../styles";
 
 class TodoCard extends React.Component {
   constructor(props) {
@@ -40,43 +41,33 @@ class TodoCard extends React.Component {
       <Card className="cardContainer">
         <CardContent>
           <label>
-            <div
-              style={{ float: "left", paddingRight: "4px", fontSize: "14px" }}
-            >
-              Card Title:
-            </div>
-            <div
-              className="ui input"
-              style={{ marginBottom: "8px", width: "80px", float: "right" }}
-            >
+            <div style={allStyles.cardTitleLabel}>Card Title:</div>
+            <div className="ui input" style={allStyles.cardTitleText}>
               <input
                 type="text"
                 value={this.state.title}
                 onChange={e => this.setState({ title: e.target.value })}
-                style={{ fontFamily: "Gill Sans MT" }}
+                style={allStyles.customFont}
               />
             </div>
           </label>
-          <div
-            className="ui input"
-            style={{ marginBottom: "5px", width: "150px" }}
-          >
+          <div className="ui input" style={allStyles.userInput}>
             <input
               type="text"
               placeholder="Enter User"
               value={this.state.user}
               onChange={e => this.setState({ user: e.target.value })}
-              style={{ fontFamily: "Gill Sans MT" }}
+              style={allStyles.customFont}
             />
           </div>
-          <div className="ui checkbox" style={{ marginBottom: "7px" }}>
+          <div className="ui checkbox" style={allStyles.checkboxInput}>
             <input
               type="checkbox"
               name="example"
               onClick={this.removeCardFunction}
-              style={{ fontFamily: "Gill Sans MT" }}
+              style={allStyles.customFont}
             />
-            <label style={{ color: "#5aac44" }}>Task Completed</label>
+            <label style={allStyles.taskLabel}>Task Completed</label>
           </div>
           {this.renderMoveTo()}
         </CardContent>

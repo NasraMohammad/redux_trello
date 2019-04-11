@@ -2,6 +2,7 @@ import React from "react";
 //import { Dropdown, Menu } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { moveCard } from "../actions";
+import { allStyles } from "../styles";
 
 class MoveToDropdown extends React.Component {
   constructor(props) {
@@ -24,23 +25,13 @@ class MoveToDropdown extends React.Component {
   render() {
     const { lists, listid } = this.props;
     return (
-      <div
-        style={{
-          marginTop: "5px",
-          fontFamily: "Gill Sans MT",
-          borderRadius: "3px",
-          padding: "2px"
-        }}
-      >
+      <div>
         <select
           value={this.state.moveToValue}
           placeholder="Move To"
           onChange={this.check}
           className="ui compact menu"
-          style={{
-            fontFamily: "Gill Sans MT",
-            width: "60px"
-          }}
+          style={allStyles.selectInput}
         >
           {lists.map(list => {
             const x = listid === list.id ? "disabled" : "";
@@ -55,11 +46,7 @@ class MoveToDropdown extends React.Component {
           type="submit"
           onClick={this.moveFunction}
           className="ui blue basic button"
-          style={{
-            fontFamily: "Gill Sans MT",
-            float: "right",
-            height: "40px"
-          }}
+          style={allStyles.moveButton}
         >
           Move
         </button>
