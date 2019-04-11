@@ -18,11 +18,11 @@ class AddButton extends React.Component {
   };
 
   addCardFunction = () => {
-    const { listid } = this.props;
+    const { listId } = this.props;
     const { title } = this.state;
 
     if (title) {
-      this.props.addCard(listid, title);
+      this.props.addCard(listId, title);
       this.setState({ title: "" });
     }
 

@@ -16,14 +16,14 @@ class MoveToDropdown extends React.Component {
   };
 
   moveFunction = () => {
-    const { listid, cardid, title, user } = this.props;
-    console.log({ listid, cardid, title, user });
-    if (this.state.moveToValue !== listid)
-      this.props.moveCard(this.state.moveToValue, listid, cardid, title, user);
+    const { listId, cardId, title, user } = this.props;
+    console.log({ listId, cardId, title, user });
+    if (this.state.moveToValue !== listId)
+      this.props.moveCard(this.state.moveToValue, listId, cardId, title, user);
   };
 
   render() {
-    const { lists, listid } = this.props;
+    const { lists, listId } = this.props;
     return (
       <div>
         <select
@@ -34,7 +34,7 @@ class MoveToDropdown extends React.Component {
           style={allStyles.selectInput}
         >
           {lists.map(list => {
-            const x = listid === list.id ? "disabled" : "";
+            const x = listId === list.id ? "disabled" : "";
             return (
               <option key={list.id} value={list.id} disabled={x}>
                 {list.title}

@@ -2,7 +2,7 @@ import React from "react";
 import TodoCard from "./TodoCard";
 import LCButton from "./LCButton";
 
-const TodoList = ({ title, cards, listid }) => {
+const TodoList = ({ title, cards, listId }) => {
   //  console.log(cards);
   return (
     <div className="container">
@@ -11,12 +11,12 @@ const TodoList = ({ title, cards, listid }) => {
         <TodoCard
           key={card.id}
           title={card.title}
-          listid={listid}
-          cardid={card.id}
+          listId={listId}
+          cardId={card.id}
           user={card.user}
         />
       ))}
-      <LCButton listid={listid} />
+      <LCButton listId={listId} />
     </div>
   );
 };

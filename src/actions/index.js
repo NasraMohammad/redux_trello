@@ -5,25 +5,25 @@ export const addList = title => {
   };
 };
 
-export const addCard = (listid, title, user = "") => {
+export const addCard = (listId, title, user = "") => {
   return {
     type: "ADD_CARD",
-    payload: { listid, title, user }
+    payload: { listId, title, user }
   };
 };
 
-export const removeCard = (listid, cardid) => {
+export const removeCard = (listId, cardId) => {
   return {
     type: "REMOVE_CARD",
-    payload: { listid, cardid }
+    payload: { listId, cardId }
   };
 };
 
-export const moveCard = (moveToValue, listid, cardid, title, user) => {
+export const moveCard = (moveToValue, listId, cardId, title, user) => {
   return {
     type: "MOVE_CARD",
-    cardid,
-    listid,
+    cardId,
+    listId,
     moveToValue,
     title,
     user

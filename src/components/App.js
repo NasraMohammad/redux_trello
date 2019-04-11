@@ -16,7 +16,7 @@ class App extends React.Component {
           {lists.map(list => (
             <TodoList
               key={list.id}
-              listid={list.id}
+              listId={list.id}
               title={list.title}
               cards={list.cards}
             />

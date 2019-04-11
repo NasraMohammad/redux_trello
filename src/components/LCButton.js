@@ -16,7 +16,7 @@ class LCButton extends React.Component {
     this.setState({ formStatus: true });
   };
 
-  falseStatus = e => {
+  falseStatus = () => {
     this.setState({ formStatus: false });
   };
 
@@ -32,11 +32,11 @@ class LCButton extends React.Component {
   };
 
   addCardFunction = () => {
-    const { listid } = this.props;
+    const { listId } = this.props;
     const { title } = this.state;
 
     if (title) {
-      this.props.addCard(listid, title);
+      this.props.addCard(listId, title);
       this.setState({ title: "" });
     }
 

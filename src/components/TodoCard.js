@@ -16,18 +16,18 @@ class TodoCard extends React.Component {
 
   state = { user: this.props.user, title: this.props.title };
   removeCardFunction = () => {
-    const { listid, cardid } = this.props;
-    this.props.removeCard(listid, cardid);
+    const { listId, cardId } = this.props;
+    this.props.removeCard(listId, cardId);
   };
 
   renderMoveTo = () => {
-    const { lists, listid, cardid } = this.props;
+    const { lists, listId, cardId } = this.props;
     console.log(this.state.user);
     if (lists.length > 1) {
       return (
         <MoveToDropdown
-          listid={listid}
-          cardid={cardid}
+          listId={listId}
+          cardId={cardId}
           title={this.state.title}
           user={this.state.user}
         />
