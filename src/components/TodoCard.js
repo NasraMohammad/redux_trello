@@ -8,10 +8,15 @@ import { connect } from "react-redux";
 import { removeCard } from "../actions";
 
 class TodoCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: this.props.user, title: this.props.title };
+  }
+
   state = { user: this.props.user, title: this.props.title };
   removeCardFunction = () => {
-    const { listid, cardid, dispatch } = this.props;
-    dispatch(removeCard(listid, cardid));
+    const { listid, cardid } = this.props;
+    this.props.removeCard(listid, cardid);
   };
 
   renderMoveTo = () => {
@@ -84,4 +89,7 @@ const mapStateToProps = state => ({
   lists: state.lists
 });
 
-export default connect(mapStateToProps)(TodoCard);
+export default connect(
+  mapStateToProps,
+  { removeCard }
+)(TodoCard);

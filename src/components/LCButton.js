@@ -6,7 +6,10 @@ import { connect } from "react-redux";
 import { addList, addCard } from "../actions";
 
 class LCButton extends React.Component {
-  state = { formStatus: false, title: "", user: "" };
+  constructor(props) {
+    super(props);
+    this.state = { formStatus: false, title: "", user: "" };
+  }
 
   trueStatus = () => {
     this.setState({ formStatus: true });
@@ -17,11 +20,10 @@ class LCButton extends React.Component {
   };
 
   addListFunction = () => {
-    const { dispatch } = this.props;
     const { title } = this.state;
 
     if (title) {
-      dispatch(addList(title));
+      this.props.addList(title);
       this.setState({ title: "" });
     }
 
@@ -29,11 +31,11 @@ class LCButton extends React.Component {
   };
 
   addCardFunction = () => {
-    const { dispatch, listid } = this.props;
+    const { listid } = this.props;
     const { title } = this.state;
 
     if (title) {
-      dispatch(addCard(listid, title));
+      this.props.addCard(listid, title);
       this.setState({ title: "" });
     }
 
@@ -129,76 +131,7 @@ class LCButton extends React.Component {
   }
 }
 
-export default connect()(LCButton);
-
-//   renderAddFormList = () => {
-//     return (
-//       <div>
-//         <Card
-//           style={{
-//             display: "flex",
-//             flexDirection: "column",
-//             padding: "6px 8px 2px"
-//           }}
-//         >
-//           <div class="ui input" style={{ margin: "5px" }}>
-//             <input
-//               type="text"
-//               placeholder="Enter List Title"
-//               onBlur={this.falseStatus}
-//               autoFocus
-//               value={this.state.title}
-//               onChange={e => this.setState({ title: e.target.value })}
-//             />
-//           </div>
-//         </Card>
-//         <Button
-//           variant="contained"
-//           style={{ color: "white", backgroundColor: "#5aac44" }}
-//         >
-//           Add List
-//         </Button>
-//       </div>
-//     );
-//   };
-
-//   renderAddFormCard = () => {
-//     return (
-//       <div>
-//         <Card
-//           style={{
-//             display: "flex",
-//             flexDirection: "column",
-//             padding: "6px 8px 2px"
-//           }}
-//         >
-//           <div class="ui input">
-//             <input
-//               type="text"
-//               placeholder="Enter Card Title"
-//               onBlur={this.falseStatus}
-//               autoFocus
-//               value={this.state.title}
-//               onChange={e => this.setState({ title: e.target.value })}
-//               style={{ margin: "5px" }}
-//             />
-//             <input
-//               type="text"
-//               placeholder="Enter User"
-//               onBlur={this.falseStatus}
-//               autoFocus
-//               value={this.state.user}
-//               onChange={e => this.setState({ user: e.target.value })}
-//               style={{ margin: "5px" }}
-//             />
-//           </div>
-//         </Card>
-//         <Button
-//           variant="contained"
-//           style={{ color: "white", backgroundColor: "#5aac44" }}
-//         >
-//           Add Card
-//         </Button>
-//       </div>
-//     );
-//   };
+export default connect(
+  null,
+  { addList, addCard }
+)(LCButton);

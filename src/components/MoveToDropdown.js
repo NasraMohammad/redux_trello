@@ -4,17 +4,21 @@ import { connect } from "react-redux";
 import { moveCard } from "../actions";
 
 class MoveToDropdown extends React.Component {
-  state = { moveToValue: 0 };
+  constructor(props) {
+    super(props);
+    this.state = { moveToValue: 0 };
+  }
+
   check = e => {
     console.log(this.state.moveTovalue);
     this.setState({ moveToValue: e.target.value });
   };
 
   moveFunction = () => {
-    const { listid, cardid, title, user, dispatch } = this.props;
+    const { listid, cardid, title, user } = this.props;
     console.log({ listid, cardid, title, user });
     if (this.state.moveToValue !== listid)
-      dispatch(moveCard(this.state.moveToValue, listid, cardid, title, user));
+      this.props.moveCard(this.state.moveToValue, listid, cardid, title, user);
   };
 
   render() {
@@ -68,4 +72,7 @@ const mapStateToProps = state => ({
   lists: state.lists
 });
 
-export default connect(mapStateToProps)(MoveToDropdown);
+export default connect(
+  mapStateToProps,
+  { moveCard }
+)(MoveToDropdown);
