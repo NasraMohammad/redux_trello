@@ -1,6 +1,6 @@
 const initialState = [];
-let listid = 0;
-let cardid = 0;
+let listId = 0;
+let cardId = 0;
 
 const listsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,21 +8,21 @@ const listsReducer = (state = initialState, action) => {
       const newList = {
         title: action.payload,
         cards: [],
-        id: listid
+        id: listId
       };
-      listid += 1;
+      listId += 1;
       return [...state, newList];
 
     case "ADD_CARD":
       const newCard = {
         title: action.payload.title,
         user: action.payload.user,
-        id: cardid
+        id: cardId
       };
-      cardid += 1;
+      cardId += 1;
 
       const newState = state.map(list => {
-        if (list.id === action.payload.listid)
+        if (list.id === action.payload.listId)
           return {
             ...list,
             cards: [...list.cards, newCard]
@@ -37,23 +37,21 @@ const listsReducer = (state = initialState, action) => {
       const movedCard = {
         title: action.title,
         user: action.user,
-        id: action.cardid
+        id: action.cardId
       };
 
       const movedState = state.map(list => {
         let removedCard = [];
         const x = parseInt(action.moveToValue);
-        // console.log(list.id);
-        // console.log(action.moveToValue);
-        // console.log(x);
+
         if (list.id === x) {
           return {
             ...list,
             cards: [...list.cards, movedCard]
           };
-        } else if (list.id === action.listid) {
+        } else if (list.id === action.listId) {
           removedCard = list.cards.filter(card => {
-            return card.id !== action.cardid;
+            return card.id !== action.cardId;
           });
           return { ...list, cards: [...removedCard] };
         } else {
@@ -65,9 +63,9 @@ const listsReducer = (state = initialState, action) => {
     case "REMOVE_CARD":
       let removedCard = [];
       const updatedState = state.map(list => {
-        if (list.id === action.payload.listid) {
+        if (list.id === action.payload.listId) {
           removedCard = list.cards.filter(card => {
-            return card.id !== action.payload.cardid;
+            return card.id !== action.payload.cardId;
           });
           return { ...list, cards: [...removedCard] };
         } else {

@@ -21,6 +21,7 @@ class App extends React.Component {
               cards={list.cards}
             />
           ))}
+
           <LCButton list />
         </div>
       </div>
