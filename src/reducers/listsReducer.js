@@ -31,25 +31,65 @@ const listsReducer = (state = initialState, action) => {
           return list;
         }
       });
+      console.log("newState");
+      console.log(newState);
       return newState;
 
+    case "REMOVE_CARD":
+      let removedCard = [];
+      const updatedState = state.map(list => {
+        removedCard = list.cards.filter(card => {
+          return card.id !== action.payload.cardId;
+        });
+
+        if (removedCard) {
+          return { ...list, cards: [...removedCard] };
+        } else {
+          return list;
+        }
+      });
+      return updatedState;
+
+    case "UPDATE_CARD":
+      const updatedCardState = state.map(list => {
+        const updatedCard = list.cards.map(card => {
+          if (card.id === action.payload.cardId) {
+            return {
+              ...card,
+              title: action.payload.newTitle,
+              user: action.payload.newUser
+            };
+          } else {
+            return { ...card };
+          }
+        });
+        return { ...list, cards: [...updatedCard] };
+      });
+
+      return updatedCardState;
+
     case "MOVE_CARD":
-      const movedCard = {
-        title: action.title,
-        user: action.user,
-        id: action.cardId
-      };
+      let originalListId = -1;
+      let movedCard = {};
+      // Grab details of card to be moved
+      const x = state.map(list => {
+        const foundCard = list.cards.find(card => card.id === action.cardId);
+        if (foundCard) {
+          originalListId = list.id;
+          movedCard = { ...foundCard };
+        }
+        return foundCard;
+      });
 
       const movedState = state.map(list => {
         let removedCard = [];
         const x = parseInt(action.moveToValue);
-
         if (list.id === x) {
           return {
             ...list,
             cards: [...list.cards, movedCard]
           };
-        } else if (list.id === action.listId) {
+        } else if (list.id === originalListId) {
           removedCard = list.cards.filter(card => {
             return card.id !== action.cardId;
           });
@@ -58,21 +98,8 @@ const listsReducer = (state = initialState, action) => {
           return list;
         }
       });
+      debugger;
       return movedState;
-
-    case "REMOVE_CARD":
-      let removedCard = [];
-      const updatedState = state.map(list => {
-        if (list.id === action.payload.listId) {
-          removedCard = list.cards.filter(card => {
-            return card.id !== action.payload.cardId;
-          });
-          return { ...list, cards: [...removedCard] };
-        } else {
-          return list;
-        }
-      });
-      return updatedState;
 
     default:
       return state;

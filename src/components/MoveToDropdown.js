@@ -1,5 +1,4 @@
 import React from "react";
-//import { Dropdown, Menu } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { moveCard } from "../actions";
 import { allStyles } from "../styles";
@@ -16,10 +15,10 @@ class MoveToDropdown extends React.Component {
   };
 
   moveFunction = () => {
-    const { listId, cardId, title, user } = this.props;
-    console.log({ listId, cardId, title, user });
+    const { listId, cardId } = this.props;
+    console.log({ listId, cardId });
     if (this.state.moveToValue !== listId)
-      this.props.moveCard(this.state.moveToValue, listId, cardId, title, user);
+      this.props.moveCard(this.state.moveToValue, cardId);
   };
 
   render() {

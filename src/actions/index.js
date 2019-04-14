@@ -12,20 +12,24 @@ export const addCard = (listId, title, user = "") => {
   };
 };
 
-export const removeCard = (listId, cardId) => {
+export const removeCard = cardId => {
   return {
     type: "REMOVE_CARD",
-    payload: { listId, cardId }
+    payload: { cardId }
   };
 };
 
-export const moveCard = (moveToValue, listId, cardId, title, user) => {
+export const moveCard = (moveToValue, cardId) => {
   return {
     type: "MOVE_CARD",
     cardId,
-    listId,
-    moveToValue,
-    title,
-    user
+    moveToValue
+  };
+};
+
+export const updateCard = (cardId, newTitle, newUser) => {
+  return {
+    type: "UPDATE_CARD",
+    payload: { cardId, newTitle, newUser }
   };
 };

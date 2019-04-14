@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
 import { connect } from "react-redux";
-import { removeCard } from "../actions";
+import { removeCard, updateCard } from "../actions";
 import { allStyles } from "../styles";
 
 class TodoCard extends React.Component {
@@ -14,29 +14,33 @@ class TodoCard extends React.Component {
     this.state = { user: this.props.user, title: this.props.title };
   }
 
-  state = { user: this.props.user, title: this.props.title };
   removeCardFunction = () => {
-    const { listId, cardId } = this.props;
-    this.props.removeCard(listId, cardId);
+    const { cardId } = this.props;
+    this.props.removeCard(cardId);
   };
 
   renderMoveTo = () => {
-    const { lists, listId, cardId } = this.props;
-    console.log(this.state.user);
+    const { lists, listId, cardId, title, user } = this.props;
+
     if (lists.length > 1) {
       return (
         <MoveToDropdown
           listId={listId}
           cardId={cardId}
-          title={this.state.title}
-          user={this.state.user}
+          title={title}
+          user={user}
         />
       );
     } else return null;
   };
 
+  updateCardFunction = () => {
+    const { title, user } = this.state;
+    this.props.updateCard(this.props.cardId, title, user);
+  };
+
   render() {
-    console.log(this.state);
+    //    debugger;
     return (
       <Card className="cardContainer">
         <CardContent>
@@ -70,6 +74,14 @@ class TodoCard extends React.Component {
             <label style={allStyles.taskLabel}>Task Completed</label>
           </div>
           {this.renderMoveTo()}
+          <button
+            type="submit"
+            onClick={this.updateCardFunction}
+            className="ui blue basic button"
+            style={allStyles.moveButton}
+          >
+            Update
+          </button>
         </CardContent>
       </Card>
     );
@@ -82,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { removeCard }
+  { removeCard, updateCard }
 )(TodoCard);
