@@ -71,14 +71,13 @@ const listsReducer = (state = initialState, action) => {
     case "MOVE_CARD":
       let originalListId = -1;
       let movedCard = {};
-      // Grab details of card to be moved
-      const x = state.map(list => {
+
+      state.map(list => {
         const foundCard = list.cards.find(card => card.id === action.cardId);
         if (foundCard) {
           originalListId = list.id;
           movedCard = { ...foundCard };
         }
-        return foundCard;
       });
 
       const movedState = state.map(list => {
@@ -98,7 +97,6 @@ const listsReducer = (state = initialState, action) => {
           return list;
         }
       });
-      debugger;
       return movedState;
 
     default:

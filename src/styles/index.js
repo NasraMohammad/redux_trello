@@ -20,6 +20,16 @@ export const allStyles = {
     float: "right",
     height: "40px"
   },
+  updateButton: {
+    fontFamily: "Gill Sans MT",
+    float: "right",
+    height: "35px",
+    width: "150px",
+    marginBottom: "13px"
+  },
+  mainTitle: { color: "white" },
+  listFlow: { display: "flex", flexDirection: "row" },
+  LCAddFormButton: { marginTop: "8px", display: "flex", alignItems: "center" },
   customFont: { fontFamily: "Gill Sans MT" },
   cardTitleLabel: { float: "left", paddingRight: "4px", fontSize: "14px" },
   cardTitleText: { marginBottom: "8px", width: "80px", float: "right" },

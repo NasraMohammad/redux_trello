@@ -40,7 +40,6 @@ class TodoCard extends React.Component {
   };
 
   render() {
-    //    debugger;
     return (
       <Card className="cardContainer">
         <CardContent>
@@ -78,7 +77,7 @@ class TodoCard extends React.Component {
             type="submit"
             onClick={this.updateCardFunction}
             className="ui blue basic button"
-            style={allStyles.moveButton}
+            style={allStyles.updateButton}
           >
             Update
           </button>

@@ -3,7 +3,6 @@ import TodoCard from "./TodoCard";
 import LCButton from "./LCButton";
 
 const TodoList = ({ title, cards, listId }) => {
-  debugger;
   return (
     <div className="container">
       <h4>{title}</h4>
