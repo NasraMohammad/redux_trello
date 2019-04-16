@@ -1,5 +1,4 @@
 import React from "react";
-
 import MoveToDropdown from "./MoveToDropdown";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -11,17 +10,13 @@ import { allStyles } from "../styles";
 import { getLists } from "../selectors";
 
 class TodoCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { user: this.props.user, title: this.props.title };
-  }
-
   removeCardFunction = () => {
-    this.props.removeCard(this.propscardId);
+    this.props.removeCard(this.props.cardId);
   };
 
   renderMoveTo = () => {
     const { lists, listId, cardId, title, user } = this.props;
+    debugger;
     if (lists.length > 1) {
       return (
         <MoveToDropdown
@@ -35,19 +30,22 @@ class TodoCard extends React.Component {
   };
 
   updateCardFunction = () => {
-    const { title, user } = this.state;
-    this.props.updateCard(this.props.cardId, title, user);
+    const { title, user, cardId, updateCard } = this.props;
+    updateCard(cardId, title, user);
   };
 
   render() {
+    console.log(this.props.user);
+    console.log(this.props.handleUser);
+    const { title, user, handleUser, handleTitle } = this.props;
     return (
       <Card className="cardContainer">
         <CardContent>
           <div className="ui input" style={allStyles.cardTitleText}>
             <input
               type="text"
-              value={this.state.title}
-              onChange={e => this.setState({ title: e.target.value })}
+              value={title}
+              onChange={handleTitle}
               style={allStyles.customFont}
             />
           </div>
@@ -55,8 +53,8 @@ class TodoCard extends React.Component {
             <input
               type="text"
               placeholder="Enter User"
-              value={this.state.user}
-              onChange={e => this.setState({ user: e.target.value })}
+              value={user}
+              onChange={handleUser}
               style={allStyles.customFont}
             />
           </div>

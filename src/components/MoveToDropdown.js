@@ -1,4 +1,5 @@
 import React from "react";
+
 import { connect } from "react-redux";
 import { moveCard } from "../actions";
 import { allStyles } from "../styles";
@@ -28,6 +29,7 @@ class MoveToDropdown extends React.Component {
 
   render() {
     const { lists, listId } = this.props;
+    debugger;
     return (
       <div>
         <select
@@ -61,6 +63,7 @@ class MoveToDropdown extends React.Component {
 
 const mapStateToProps = state => ({
   lists: getLists(state)
+  // cards: getCardsOfList(state, ownProps.listId)
 });
 
 export default connect(

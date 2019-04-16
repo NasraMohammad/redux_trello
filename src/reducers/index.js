@@ -71,7 +71,17 @@ const reducer = (state = initialState, action) => {
     }
     case "MOVE_CARD": {
       const { cardId, moveToValue } = action.payload;
-
+      const v = {
+        ...state,
+        cards: {
+          ...state.cards,
+          [cardId]: {
+            ...state.cards[cardId],
+            listId: moveToValue
+          }
+        }
+      };
+      console.log(v);
       return {
         ...state,
         cards: {
