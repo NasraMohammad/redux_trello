@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { removeCard, updateCard } from "../actions";
 import { allStyles } from "../styles";
 
+import { getLists } from "../selectors";
+
 class TodoCard extends React.Component {
   constructor(props) {
     super(props);
@@ -15,13 +17,11 @@ class TodoCard extends React.Component {
   }
 
   removeCardFunction = () => {
-    const { cardId } = this.props;
-    this.props.removeCard(cardId);
+    this.props.removeCard(this.propscardId);
   };
 
   renderMoveTo = () => {
     const { lists, listId, cardId, title, user } = this.props;
-
     if (lists.length > 1) {
       return (
         <MoveToDropdown
@@ -43,17 +43,14 @@ class TodoCard extends React.Component {
     return (
       <Card className="cardContainer">
         <CardContent>
-          <label>
-            <div style={allStyles.cardTitleLabel}>Card Title:</div>
-            <div className="ui input" style={allStyles.cardTitleText}>
-              <input
-                type="text"
-                value={this.state.title}
-                onChange={e => this.setState({ title: e.target.value })}
-                style={allStyles.customFont}
-              />
-            </div>
-          </label>
+          <div className="ui input" style={allStyles.cardTitleText}>
+            <input
+              type="text"
+              value={this.state.title}
+              onChange={e => this.setState({ title: e.target.value })}
+              style={allStyles.customFont}
+            />
+          </div>
           <div className="ui input" style={allStyles.userInput}>
             <input
               type="text"
@@ -88,7 +85,7 @@ class TodoCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  lists: state.lists
+  lists: getLists(state)
 });
 
 export default connect(

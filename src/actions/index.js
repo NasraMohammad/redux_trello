@@ -19,11 +19,10 @@ export const removeCard = cardId => {
   };
 };
 
-export const moveCard = (moveToValue, cardId) => {
+export const moveCard = (cardId, moveToValue) => {
   return {
     type: "MOVE_CARD",
-    cardId,
-    moveToValue
+    payload: { cardId, moveToValue }
   };
 };
 

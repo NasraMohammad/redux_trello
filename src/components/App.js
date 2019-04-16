@@ -3,6 +3,7 @@ import TodoList from "./TodoList";
 import LCButton from "./LCButton";
 import { connect } from "react-redux";
 import { allStyles } from "../styles";
+import { getLists, getCards } from "../selectors";
 
 class App extends React.Component {
   render() {
@@ -11,13 +12,8 @@ class App extends React.Component {
       <div className="appContainer">
         <h2 style={allStyles.mainTitle}>React Redux Trello</h2>
         <div className="listContainer" style={allStyles.listFlow}>
-          {lists.map(list => (
-            <TodoList
-              key={list.id}
-              listId={list.id}
-              title={list.title}
-              cards={list.cards}
-            />
+          {lists.map((title, key) => (
+            <TodoList key={key} listId={key} title={title} />
           ))}
 
           <LCButton list />
@@ -27,7 +23,8 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  lists: state.lists
+  lists: getLists(state),
+  allCards: getCards(state)
 });
 
 export default connect(mapStateToProps)(App);

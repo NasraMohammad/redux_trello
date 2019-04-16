@@ -3,23 +3,28 @@ import { connect } from "react-redux";
 import { moveCard } from "../actions";
 import { allStyles } from "../styles";
 
+import { getLists } from "../selectors";
+
 class MoveToDropdown extends React.Component {
   constructor(props) {
     super(props);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    this.moveFunction = this.moveFunction.bind(this);
+
     this.state = { moveToValue: 0 };
   }
 
-  check = e => {
-    console.log(this.state.moveTovalue);
-    this.setState({ moveToValue: e.target.value });
-  };
+  onSelectChange(value) {
+    this.setState({ moveToValue: parseInt(value) });
+  }
 
-  moveFunction = () => {
+  moveFunction() {
     const { listId, cardId } = this.props;
-    console.log({ listId, cardId });
-    if (this.state.moveToValue !== listId)
-      this.props.moveCard(this.state.moveToValue, cardId);
-  };
+    console.log(listId, this.state.moveToValue, cardId);
+    if (this.state.moveToValue !== listId) {
+      this.props.moveCard(cardId, this.state.moveToValue);
+    }
+  }
 
   render() {
     const { lists, listId } = this.props;
@@ -28,15 +33,15 @@ class MoveToDropdown extends React.Component {
         <select
           value={this.state.moveToValue}
           placeholder="Move To"
-          onChange={this.check}
+          onChange={event => this.onSelectChange(event.target.value)}
           className="ui compact menu"
           style={allStyles.selectInput}
         >
-          {lists.map(list => {
-            const x = listId === list.id ? "disabled" : "";
+          {lists.map((title, key) => {
+            const x = listId === key ? "disabled" : "";
             return (
-              <option key={list.id} value={list.id} disabled={x}>
-                {list.title}
+              <option key={key} value={key} disabled={x}>
+                {title}
               </option>
             );
           })}
@@ -55,7 +60,7 @@ class MoveToDropdown extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  lists: state.lists
+  lists: getLists(state)
 });
 
 export default connect(
