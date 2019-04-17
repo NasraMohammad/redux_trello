@@ -16,7 +16,6 @@ class TodoCard extends React.Component {
 
   renderMoveTo = () => {
     const { lists, listId, cardId, title, user } = this.props;
-    debugger;
     if (lists.length > 1) {
       return (
         <MoveToDropdown
@@ -35,8 +34,8 @@ class TodoCard extends React.Component {
   };
 
   render() {
-    console.log(this.props.user);
-    console.log(this.props.handleUser);
+    console.log(this.props);
+    //console.log(this.props.handleUser);
     const { title, user, handleUser, handleTitle } = this.props;
     return (
       <Card className="cardContainer">

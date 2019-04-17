@@ -36,11 +36,12 @@ class TodoList extends React.Component {
   handleTitle = e => this.setState({ title: e.target.value });
 
   handleUser = e => {
-    debugger;
     return this.setState({ user: e.target.value });
   };
+  // change = (t, u) => this.setState({ title: t, user: u });
 
   render() {
+    console.log(this.state);
     return (
       <div className="container">
         <h4>{this.props.title}</h4>

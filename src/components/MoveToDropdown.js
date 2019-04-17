@@ -29,7 +29,6 @@ class MoveToDropdown extends React.Component {
 
   render() {
     const { lists, listId } = this.props;
-    debugger;
     return (
       <div>
         <select
