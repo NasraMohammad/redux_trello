@@ -11,7 +11,6 @@ class MoveToDropdown extends React.Component {
     super(props);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.moveFunction = this.moveFunction.bind(this);
-
     this.state = { moveToValue: 0 };
   }
 
@@ -21,7 +20,6 @@ class MoveToDropdown extends React.Component {
 
   moveFunction() {
     const { listId, cardId } = this.props;
-    console.log(listId, this.state.moveToValue, cardId);
     if (this.state.moveToValue !== listId) {
       this.props.moveCard(cardId, this.state.moveToValue);
     }
@@ -62,7 +60,6 @@ class MoveToDropdown extends React.Component {
 
 const mapStateToProps = state => ({
   lists: getLists(state)
-  // cards: getCardsOfList(state, ownProps.listId)
 });
 
 export default connect(

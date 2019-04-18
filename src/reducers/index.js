@@ -42,7 +42,6 @@ const reducer = (state = initialState, action) => {
     }
     case "REMOVE_CARD": {
       const { cardId } = action.payload;
-
       return {
         ...state,
         cards: {
@@ -55,7 +54,7 @@ const reducer = (state = initialState, action) => {
       };
     }
     case "UPDATE_CARD": {
-      const { cardId, title, user } = action.payload;
+      const { cardId, newTitle, newUser } = action.payload;
 
       return {
         ...state,
@@ -63,25 +62,14 @@ const reducer = (state = initialState, action) => {
           ...state.cards,
           [cardId]: {
             ...state.cards[cardId],
-            title,
-            user
+            title: newTitle,
+            user: newUser
           }
         }
       };
     }
     case "MOVE_CARD": {
       const { cardId, moveToValue } = action.payload;
-      const v = {
-        ...state,
-        cards: {
-          ...state.cards,
-          [cardId]: {
-            ...state.cards[cardId],
-            listId: moveToValue
-          }
-        }
-      };
-      console.log(v);
       return {
         ...state,
         cards: {

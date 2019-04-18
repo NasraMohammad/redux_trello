@@ -5,4 +5,8 @@ export const getCards = state =>
   Object.keys(state.cards).map(cardId => state.cards[cardId]);
 
 export const getCardsOfList = (state, listId) =>
-  getCards(state) ? getCards(state).filter(card => card.listId === listId) : [];
+  getCards(state)
+    ? getCards(state).filter(
+        card => card.listId === listId && card.done === false
+      )
+    : [];

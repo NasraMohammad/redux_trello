@@ -10,8 +10,46 @@ import { allStyles } from "../styles";
 import { getLists } from "../selectors";
 
 class TodoCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: "", title: "", flag: false };
+  }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.title,
+      user: this.props.user
+    });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    //   debugger;
+    if (prevState.flag === false) {
+      return {
+        title: nextProps.title,
+        user: nextProps.user
+      };
+    } else if (prevState.flag) {
+      return {
+        title: prevState.title,
+        user: prevState.user
+      };
+    }
+
+    return null;
+  }
+
+  handleChange = e =>
+    this.setState({ [e.target.name]: e.target.value, flag: true });
+
   removeCardFunction = () => {
     this.props.removeCard(this.props.cardId);
+  };
+
+  updateCardFunction = () => {
+    const { cardId, updateCard } = this.props;
+    updateCard(cardId, this.state.title, this.state.user);
+    this.setState({ flag: false });
   };
 
   renderMoveTo = () => {
@@ -28,23 +66,16 @@ class TodoCard extends React.Component {
     } else return null;
   };
 
-  updateCardFunction = () => {
-    const { title, user, cardId, updateCard } = this.props;
-    updateCard(cardId, title, user);
-  };
-
   render() {
-    console.log(this.props);
-    //console.log(this.props.handleUser);
-    const { title, user, handleUser, handleTitle } = this.props;
     return (
       <Card className="cardContainer">
         <CardContent>
           <div className="ui input" style={allStyles.cardTitleText}>
             <input
               type="text"
-              value={title}
-              onChange={handleTitle}
+              name="title"
+              value={this.state.title}
+              onChange={this.handleChange}
               style={allStyles.customFont}
             />
           </div>
@@ -52,8 +83,9 @@ class TodoCard extends React.Component {
             <input
               type="text"
               placeholder="Enter User"
-              value={user}
-              onChange={handleUser}
+              name="user"
+              value={this.state.user}
+              onChange={this.handleChange}
               style={allStyles.customFont}
             />
           </div>
